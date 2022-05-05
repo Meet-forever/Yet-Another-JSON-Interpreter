@@ -1,0 +1,378 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> start
+Rule 1     start -> single
+Rule 2     start -> keyvaluepairs
+Rule 3     start -> list
+Rule 4     single -> NUM
+Rule 5     single -> STR
+Rule 6     single -> BOOL
+Rule 7     singltons -> NUM
+Rule 8     singltons -> STR
+Rule 9     singltons -> BOOL
+Rule 10    keyvaluepairs -> LPR body RPR
+Rule 11    keyvaluepairs -> LPR RPR
+Rule 12    body -> body COMMA bodybase
+Rule 13    body -> bodybase
+Rule 14    bodybase -> STR COLON value
+Rule 15    value -> singltons
+Rule 16    value -> list
+Rule 17    value -> keyvaluepairs
+Rule 18    list -> LBR items RBR
+Rule 19    items -> items COMMA baseitems
+Rule 20    items -> baseitems
+Rule 21    baseitems -> singltons
+Rule 22    baseitems -> keyvaluepairs
+
+Terminals, with rules where they appear
+
+BOOL                 : 6 9
+COLON                : 14
+COMMA                : 12 19
+LBR                  : 18
+LPR                  : 10 11
+NUM                  : 4 7
+RBR                  : 18
+RPR                  : 10 11
+STR                  : 5 8 14
+error                : 
+
+Nonterminals, with rules where they appear
+
+baseitems            : 19 20
+body                 : 10 12
+bodybase             : 12 13
+items                : 18 19
+keyvaluepairs        : 2 17 22
+list                 : 3 16
+single               : 1
+singltons            : 15 21
+start                : 0
+value                : 14
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . start
+    (1) start -> . single
+    (2) start -> . keyvaluepairs
+    (3) start -> . list
+    (4) single -> . NUM
+    (5) single -> . STR
+    (6) single -> . BOOL
+    (10) keyvaluepairs -> . LPR body RPR
+    (11) keyvaluepairs -> . LPR RPR
+    (18) list -> . LBR items RBR
+
+    NUM             shift and go to state 5
+    STR             shift and go to state 6
+    BOOL            shift and go to state 7
+    LPR             shift and go to state 8
+    LBR             shift and go to state 9
+
+    start                          shift and go to state 1
+    single                         shift and go to state 2
+    keyvaluepairs                  shift and go to state 3
+    list                           shift and go to state 4
+
+state 1
+
+    (0) S' -> start .
+
+
+
+state 2
+
+    (1) start -> single .
+
+    $end            reduce using rule 1 (start -> single .)
+
+
+state 3
+
+    (2) start -> keyvaluepairs .
+
+    $end            reduce using rule 2 (start -> keyvaluepairs .)
+
+
+state 4
+
+    (3) start -> list .
+
+    $end            reduce using rule 3 (start -> list .)
+
+
+state 5
+
+    (4) single -> NUM .
+
+    $end            reduce using rule 4 (single -> NUM .)
+
+
+state 6
+
+    (5) single -> STR .
+
+    $end            reduce using rule 5 (single -> STR .)
+
+
+state 7
+
+    (6) single -> BOOL .
+
+    $end            reduce using rule 6 (single -> BOOL .)
+
+
+state 8
+
+    (10) keyvaluepairs -> LPR . body RPR
+    (11) keyvaluepairs -> LPR . RPR
+    (12) body -> . body COMMA bodybase
+    (13) body -> . bodybase
+    (14) bodybase -> . STR COLON value
+
+    RPR             shift and go to state 11
+    STR             shift and go to state 13
+
+    body                           shift and go to state 10
+    bodybase                       shift and go to state 12
+
+state 9
+
+    (18) list -> LBR . items RBR
+    (19) items -> . items COMMA baseitems
+    (20) items -> . baseitems
+    (21) baseitems -> . singltons
+    (22) baseitems -> . keyvaluepairs
+    (7) singltons -> . NUM
+    (8) singltons -> . STR
+    (9) singltons -> . BOOL
+    (10) keyvaluepairs -> . LPR body RPR
+    (11) keyvaluepairs -> . LPR RPR
+
+    NUM             shift and go to state 18
+    STR             shift and go to state 19
+    BOOL            shift and go to state 20
+    LPR             shift and go to state 8
+
+    items                          shift and go to state 14
+    baseitems                      shift and go to state 15
+    singltons                      shift and go to state 16
+    keyvaluepairs                  shift and go to state 17
+
+state 10
+
+    (10) keyvaluepairs -> LPR body . RPR
+    (12) body -> body . COMMA bodybase
+
+    RPR             shift and go to state 21
+    COMMA           shift and go to state 22
+
+
+state 11
+
+    (11) keyvaluepairs -> LPR RPR .
+
+    $end            reduce using rule 11 (keyvaluepairs -> LPR RPR .)
+    RBR             reduce using rule 11 (keyvaluepairs -> LPR RPR .)
+    COMMA           reduce using rule 11 (keyvaluepairs -> LPR RPR .)
+    RPR             reduce using rule 11 (keyvaluepairs -> LPR RPR .)
+
+
+state 12
+
+    (13) body -> bodybase .
+
+    RPR             reduce using rule 13 (body -> bodybase .)
+    COMMA           reduce using rule 13 (body -> bodybase .)
+
+
+state 13
+
+    (14) bodybase -> STR . COLON value
+
+    COLON           shift and go to state 23
+
+
+state 14
+
+    (18) list -> LBR items . RBR
+    (19) items -> items . COMMA baseitems
+
+    RBR             shift and go to state 24
+    COMMA           shift and go to state 25
+
+
+state 15
+
+    (20) items -> baseitems .
+
+    RBR             reduce using rule 20 (items -> baseitems .)
+    COMMA           reduce using rule 20 (items -> baseitems .)
+
+
+state 16
+
+    (21) baseitems -> singltons .
+
+    RBR             reduce using rule 21 (baseitems -> singltons .)
+    COMMA           reduce using rule 21 (baseitems -> singltons .)
+
+
+state 17
+
+    (22) baseitems -> keyvaluepairs .
+
+    RBR             reduce using rule 22 (baseitems -> keyvaluepairs .)
+    COMMA           reduce using rule 22 (baseitems -> keyvaluepairs .)
+
+
+state 18
+
+    (7) singltons -> NUM .
+
+    RBR             reduce using rule 7 (singltons -> NUM .)
+    COMMA           reduce using rule 7 (singltons -> NUM .)
+    RPR             reduce using rule 7 (singltons -> NUM .)
+
+
+state 19
+
+    (8) singltons -> STR .
+
+    RBR             reduce using rule 8 (singltons -> STR .)
+    COMMA           reduce using rule 8 (singltons -> STR .)
+    RPR             reduce using rule 8 (singltons -> STR .)
+
+
+state 20
+
+    (9) singltons -> BOOL .
+
+    RBR             reduce using rule 9 (singltons -> BOOL .)
+    COMMA           reduce using rule 9 (singltons -> BOOL .)
+    RPR             reduce using rule 9 (singltons -> BOOL .)
+
+
+state 21
+
+    (10) keyvaluepairs -> LPR body RPR .
+
+    $end            reduce using rule 10 (keyvaluepairs -> LPR body RPR .)
+    RBR             reduce using rule 10 (keyvaluepairs -> LPR body RPR .)
+    COMMA           reduce using rule 10 (keyvaluepairs -> LPR body RPR .)
+    RPR             reduce using rule 10 (keyvaluepairs -> LPR body RPR .)
+
+
+state 22
+
+    (12) body -> body COMMA . bodybase
+    (14) bodybase -> . STR COLON value
+
+    STR             shift and go to state 13
+
+    bodybase                       shift and go to state 26
+
+state 23
+
+    (14) bodybase -> STR COLON . value
+    (15) value -> . singltons
+    (16) value -> . list
+    (17) value -> . keyvaluepairs
+    (7) singltons -> . NUM
+    (8) singltons -> . STR
+    (9) singltons -> . BOOL
+    (18) list -> . LBR items RBR
+    (10) keyvaluepairs -> . LPR body RPR
+    (11) keyvaluepairs -> . LPR RPR
+
+    NUM             shift and go to state 18
+    STR             shift and go to state 19
+    BOOL            shift and go to state 20
+    LBR             shift and go to state 9
+    LPR             shift and go to state 8
+
+    value                          shift and go to state 27
+    singltons                      shift and go to state 28
+    list                           shift and go to state 29
+    keyvaluepairs                  shift and go to state 30
+
+state 24
+
+    (18) list -> LBR items RBR .
+
+    $end            reduce using rule 18 (list -> LBR items RBR .)
+    RPR             reduce using rule 18 (list -> LBR items RBR .)
+    COMMA           reduce using rule 18 (list -> LBR items RBR .)
+
+
+state 25
+
+    (19) items -> items COMMA . baseitems
+    (21) baseitems -> . singltons
+    (22) baseitems -> . keyvaluepairs
+    (7) singltons -> . NUM
+    (8) singltons -> . STR
+    (9) singltons -> . BOOL
+    (10) keyvaluepairs -> . LPR body RPR
+    (11) keyvaluepairs -> . LPR RPR
+
+    NUM             shift and go to state 18
+    STR             shift and go to state 19
+    BOOL            shift and go to state 20
+    LPR             shift and go to state 8
+
+    baseitems                      shift and go to state 31
+    singltons                      shift and go to state 16
+    keyvaluepairs                  shift and go to state 17
+
+state 26
+
+    (12) body -> body COMMA bodybase .
+
+    RPR             reduce using rule 12 (body -> body COMMA bodybase .)
+    COMMA           reduce using rule 12 (body -> body COMMA bodybase .)
+
+
+state 27
+
+    (14) bodybase -> STR COLON value .
+
+    RPR             reduce using rule 14 (bodybase -> STR COLON value .)
+    COMMA           reduce using rule 14 (bodybase -> STR COLON value .)
+
+
+state 28
+
+    (15) value -> singltons .
+
+    RPR             reduce using rule 15 (value -> singltons .)
+    COMMA           reduce using rule 15 (value -> singltons .)
+
+
+state 29
+
+    (16) value -> list .
+
+    RPR             reduce using rule 16 (value -> list .)
+    COMMA           reduce using rule 16 (value -> list .)
+
+
+state 30
+
+    (17) value -> keyvaluepairs .
+
+    RPR             reduce using rule 17 (value -> keyvaluepairs .)
+    COMMA           reduce using rule 17 (value -> keyvaluepairs .)
+
+
+state 31
+
+    (19) items -> items COMMA baseitems .
+
+    RBR             reduce using rule 19 (items -> items COMMA baseitems .)
+    COMMA           reduce using rule 19 (items -> items COMMA baseitems .)
+

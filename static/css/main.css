@@ -1,0 +1,25 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+body{
+    width: 980px;
+    height: 100vh;
+    margin: 0 auto;
+}
+h1{
+    text-align: center;
+}
+#output{
+    width: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(199, 199, 199);
+}
+textarea{
+    width: 100%;
+    height: 70vh;
+    padding: 10px;
+    resize: none;
+}
