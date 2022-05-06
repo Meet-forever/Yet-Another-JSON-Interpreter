@@ -1,5 +1,5 @@
 # Yet Another JSON Parser 
-## (A JSON Validator + Formatter)
+## (A JSON Validator + Formatter + Interpreter)
 
 When a user writes an input, it first goes to Lexical Analyzer, i.e., JSONLexer, which tokenizes the given string input into a sequence of tokens. Once it's finished with the lexer and no error occurs, the given input string is syntactically correct.
 
