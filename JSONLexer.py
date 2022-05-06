@@ -12,6 +12,7 @@ t_COMMA = r','
 def t_BOOL(t):
     r'(true)|(false)'
     t.type = 'BOOL'
+    t.value = t.value == "true"
     return t
     
 def t_string(t):
@@ -22,7 +23,9 @@ def t_string(t):
 def t_number(t):
     r'(\-|\+)?[0-9]+(\.[0-9]+)?'
     t.type = 'NUM'
-    t.value = float(t.value)
+    if '.' in t.value:
+        t.value = float(t.value)
+    else: t.value = int(t.value)
     return t
 
 def t_error(t):

@@ -34,29 +34,19 @@ def eval(d:list, st: str, sp: int, inc = 4):
 
 
 def p_start(p):
-    '''start : single
+    '''start : singltons
             | keyvaluepairs
             | list'''
     p[0] = p[1]
 
-def p_singles(p):
-    ''' single : NUM
-                    | STR
-                    | BOOL'''
-    if isinstance(p[1], bool):
-        p[0] = ["BOOL", str(p[1])]
-    elif isinstance(p[1], float):
-        p[0]= ["NUM", str(p[1])]
-    else:
-        p[0] = ["STR", p[1]]
 
 def p_singleton(p):
     ''' singltons : NUM
                     | STR
                     | BOOL'''
     if isinstance(p[1], bool):
-        p[0] = ["BOOL", str(p[1])]
-    elif isinstance(p[1], float):
+        p[0] = ["BOOL", 'true' if p[1] else 'false']
+    elif isinstance(p[1], float) or isinstance(p[1],int):
         p[0]= ["NUM", str(p[1])]
     else:
         p[0] = ["STR", p[1]]
@@ -79,15 +69,8 @@ def p_body2(p):
 
 
 def p_body_base(p):
-    ''' bodybase : STR COLON value'''
+    ''' bodybase : STR COLON start'''
     p[0] = ['pair', p[1], p[3]]
-
-
-def p_body_value(p):
-    '''value : singltons
-            | list
-            | keyvaluepairs'''
-    p[0] = p[1]
 
 
 def p_list(p):
@@ -110,7 +93,7 @@ def p_list_base_items(p):
     p[0] = p[1]
 
 def p_error(p):
-    pass
+    raise Exception("Parsing Error")
 
 
 # Build the parser
@@ -120,10 +103,7 @@ parser = yacc.yacc()
 # Debug
 # data  = '''
 # ["nice", 2 , true]'''
-# data = '''{
-#     "nice" : "work",
-#     "alive" : true
-# }'''
+# data = '''"nice": 3'''
 
 # data = '''
 # {

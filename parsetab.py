@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'BOOL COLON COMMA LBR LPR NUM RBR RPR STRstart : single\n            | keyvaluepairs\n            | list single : NUM\n                    | STR\n                    | BOOL singltons : NUM\n                    | STR\n                    | BOOLkeyvaluepairs : LPR body RPRkeyvaluepairs : LPR RPRbody : body COMMA bodybasebody : bodybase bodybase : STR COLON valuevalue : singltons\n            | list\n            | keyvaluepairslist : LBR items RBRitems : items COMMA baseitemsitems : baseitemsbaseitems : singltons\n                | keyvaluepairs'
+_lr_signature = 'BOOL COLON COMMA LBR LPR NUM RBR RPR STRstart : singltons\n            | keyvaluepairs\n            | list singltons : NUM\n                    | STR\n                    | BOOLkeyvaluepairs : LPR body RPRkeyvaluepairs : LPR RPRbody : body COMMA bodybasebody : bodybase bodybase : STR COLON startlist : LBR items RBRitems : items COMMA baseitemsitems : baseitemsbaseitems : singltons\n                | keyvaluepairs'
     
-_lr_action_items = {'NUM':([0,9,23,25,],[5,18,18,18,]),'STR':([0,8,9,22,23,25,],[6,13,19,13,19,19,]),'BOOL':([0,9,23,25,],[7,20,20,20,]),'LPR':([0,9,23,25,],[8,8,8,8,]),'LBR':([0,23,],[9,9,]),'$end':([1,2,3,4,5,6,7,11,21,24,],[0,-1,-2,-3,-4,-5,-6,-11,-10,-18,]),'RPR':([8,10,11,12,18,19,20,21,24,26,27,28,29,30,],[11,21,-11,-13,-7,-8,-9,-10,-18,-12,-14,-15,-16,-17,]),'COMMA':([10,11,12,14,15,16,17,18,19,20,21,24,26,27,28,29,30,31,],[22,-11,-13,25,-20,-21,-22,-7,-8,-9,-10,-18,-12,-14,-15,-16,-17,-19,]),'RBR':([11,14,15,16,17,18,19,20,21,31,],[-11,24,-20,-21,-22,-7,-8,-9,-10,-19,]),'COLON':([13,],[23,]),}
+_lr_action_items = {'NUM':([0,9,20,22,],[5,5,5,5,]),'STR':([0,8,9,19,20,22,],[6,13,6,13,6,6,]),'BOOL':([0,9,20,22,],[7,7,7,7,]),'LPR':([0,9,20,22,],[8,8,8,8,]),'LBR':([0,20,],[9,9,]),'$end':([1,2,3,4,5,6,7,11,18,21,],[0,-1,-2,-3,-4,-5,-6,-8,-7,-12,]),'RPR':([2,3,4,5,6,7,8,10,11,12,18,21,23,24,],[-1,-2,-3,-4,-5,-6,11,18,-8,-10,-7,-12,-9,-11,]),'COMMA':([2,3,4,5,6,7,10,11,12,14,15,16,17,18,21,23,24,25,],[-1,-2,-3,-4,-5,-6,19,-8,-10,22,-14,-15,-16,-7,-12,-9,-11,-13,]),'RBR':([5,6,7,11,14,15,16,17,18,25,],[-4,-5,-6,-8,21,-14,-15,-16,-7,-13,]),'COLON':([13,],[20,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'start':([0,],[1,]),'single':([0,],[2,]),'keyvaluepairs':([0,9,23,25,],[3,17,30,17,]),'list':([0,23,],[4,29,]),'body':([8,],[10,]),'bodybase':([8,22,],[12,26,]),'items':([9,],[14,]),'baseitems':([9,25,],[15,31,]),'singltons':([9,23,25,],[16,28,16,]),'value':([23,],[27,]),}
+_lr_goto_items = {'start':([0,20,],[1,24,]),'singltons':([0,9,20,22,],[2,16,2,16,]),'keyvaluepairs':([0,9,20,22,],[3,17,3,17,]),'list':([0,20,],[4,4,]),'body':([8,],[10,]),'bodybase':([8,19,],[12,23,]),'items':([9,],[14,]),'baseitems':([9,22,],[15,25,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,26 +27,20 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> start","S'",1,None,None,None),
-  ('start -> single','start',1,'p_start','JSONParser.py',37),
+  ('start -> singltons','start',1,'p_start','JSONParser.py',37),
   ('start -> keyvaluepairs','start',1,'p_start','JSONParser.py',38),
   ('start -> list','start',1,'p_start','JSONParser.py',39),
-  ('single -> NUM','single',1,'p_singles','JSONParser.py',43),
-  ('single -> STR','single',1,'p_singles','JSONParser.py',44),
-  ('single -> BOOL','single',1,'p_singles','JSONParser.py',45),
-  ('singltons -> NUM','singltons',1,'p_singleton','JSONParser.py',54),
-  ('singltons -> STR','singltons',1,'p_singleton','JSONParser.py',55),
-  ('singltons -> BOOL','singltons',1,'p_singleton','JSONParser.py',56),
-  ('keyvaluepairs -> LPR body RPR','keyvaluepairs',3,'p_key_value_pairs','JSONParser.py',65),
-  ('keyvaluepairs -> LPR RPR','keyvaluepairs',2,'p_key_value_pairs2','JSONParser.py',69),
-  ('body -> body COMMA bodybase','body',3,'p_body','JSONParser.py',73),
-  ('body -> bodybase','body',1,'p_body2','JSONParser.py',77),
-  ('bodybase -> STR COLON value','bodybase',3,'p_body_base','JSONParser.py',82),
-  ('value -> singltons','value',1,'p_body_value','JSONParser.py',87),
-  ('value -> list','value',1,'p_body_value','JSONParser.py',88),
-  ('value -> keyvaluepairs','value',1,'p_body_value','JSONParser.py',89),
-  ('list -> LBR items RBR','list',3,'p_list','JSONParser.py',94),
-  ('items -> items COMMA baseitems','items',3,'p_list_items','JSONParser.py',99),
-  ('items -> baseitems','items',1,'p_items','JSONParser.py',104),
-  ('baseitems -> singltons','baseitems',1,'p_list_base_items','JSONParser.py',108),
-  ('baseitems -> keyvaluepairs','baseitems',1,'p_list_base_items','JSONParser.py',109),
+  ('singltons -> NUM','singltons',1,'p_singleton','JSONParser.py',44),
+  ('singltons -> STR','singltons',1,'p_singleton','JSONParser.py',45),
+  ('singltons -> BOOL','singltons',1,'p_singleton','JSONParser.py',46),
+  ('keyvaluepairs -> LPR body RPR','keyvaluepairs',3,'p_key_value_pairs','JSONParser.py',55),
+  ('keyvaluepairs -> LPR RPR','keyvaluepairs',2,'p_key_value_pairs2','JSONParser.py',59),
+  ('body -> body COMMA bodybase','body',3,'p_body','JSONParser.py',63),
+  ('body -> bodybase','body',1,'p_body2','JSONParser.py',67),
+  ('bodybase -> STR COLON start','bodybase',3,'p_body_base','JSONParser.py',72),
+  ('list -> LBR items RBR','list',3,'p_list','JSONParser.py',77),
+  ('items -> items COMMA baseitems','items',3,'p_list_items','JSONParser.py',82),
+  ('items -> baseitems','items',1,'p_items','JSONParser.py',87),
+  ('baseitems -> singltons','baseitems',1,'p_list_base_items','JSONParser.py',91),
+  ('baseitems -> keyvaluepairs','baseitems',1,'p_list_base_items','JSONParser.py',92),
 ]
