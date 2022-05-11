@@ -13,25 +13,34 @@ Copy JSONLexer and JSONParser:
 <a href="https://github.com/Meet-forever/Yet-Another-JSON-Parser/blob/main/JSONLexer.py" target="_blank">JSONLexer</a>
 <a href="https://github.com/Meet-forever/Yet-Another-JSON-Parser/blob/main/JSONParser.py" target="_blank">JSONParser</a>
 
-Required library to run Lexer and Parser:
+#### Required library to run Lexer and Parser:
 ```bash
 pip install ply 
 ```
 Done!
 
-A simple snippet:
+#### A simple snippet:
 ```python
 from JSONParser import parser, eval
 json_input = '"works"' 
-''' 
-Instead of simple string, one can also use file, 
-input function or Docstrings to validate the JSON input. 
+ 
+# Instead of simple string, one can also use file, input function or Docstrings to validate the JSON input. 
+"""
+Example:
+json_input = '''
+{
+    "name" : "JSON parser",
+    "works" " true,
+    "data" : [1, 2, 3]
+}
 '''
+"""
+
 try:
     parse = parser.parse(json_input)
     if parse:
-        print(eval(parse, "", 0))
         print("Valid!")
+        print(eval(parse, "", 0))
     else:
         print("Invalid!")
 except Exception as e:
