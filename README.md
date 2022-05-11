@@ -30,6 +30,7 @@ input function or Docstrings to validate the JSON input.
 try:
     parse = parser.parse(json_input)
     if parse:
+        print(eval(parse, "", 0))
         print("Valid!")
     else:
         print("Invalid!")
